@@ -1,5 +1,13 @@
 pipeline {
-    agent none
+    agent any
+
+
+    triggers {
+        // Poll SCM every 5 minutes for changes
+        pollSCM('H/5 * * * *')
+        // Trigger build on each Github push
+        githubPush()
+    }
     
     environment {
         DOCKER_IMAGE = 'weekend-task-manager'
